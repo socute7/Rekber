@@ -1,10 +1,11 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect } from 'react'
-import { useNavigation } from 'expo-router'
+import { useNavigation, useRouter } from 'expo-router'
 import { Colors } from '@/constants/Colors';
 
 export default function SignIn() {
     const navigation=useNavigation();
+    const router=useRouter();
 
     useEffect(()=>{
         navigation.setOptions({
@@ -19,26 +20,25 @@ export default function SignIn() {
         paddingTop:80,
         height:'100%'
     }}>
-      <Text style={{
-        fontFamily:'outfit-bold',
-        fontSize:30,
-        color:Colors.WHITE
-      }}>Let's Sign You In</Text>
-      <Text style={{
-        fontFamily:'outfit',
-        fontSize:29,
-        color:Colors.GRAY,
-        marginTop:20
-      }}>Welcome Back</Text>
-      <Text style={{
-        fontFamily:'outfit',
-        fontSize:29,
-        color:Colors.GRAY
-      }}>You've been missed!</Text>
+      <Image source={require('./../../../assets/images/logo-removebg.png')}
+      style={{
+        width:'100%',
+        height:150
+      }}
+      />
 
       <View style={{
         marginTop:50
       }}>
+        <View>
+          <Text style={{
+          color:Colors.WHITE,
+          fontSize:25,
+          textAlign:'center',
+          fontFamily:'outfit-bold',
+          marginBottom:20
+        }}>Login</Text>
+        </View>
         <Text style={{
             color:Colors.WHITE,
             fontFamily:'outfit',
@@ -61,6 +61,24 @@ export default function SignIn() {
         placeholder='Enter Password'
         placeholderTextColor='gray'/>
       </View>
+      <TouchableOpacity style={styles.buttonLogin}>
+        <Text style={{
+          color:Colors.WHITE,
+          textAlign:'center',
+          fontFamily:'outfit',
+          fontSize:17
+        }}>Login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity  
+      onPress={()=>router.replace('auth/sign-up')}
+      style={styles.buttonRegister}>
+        <Text style={{
+          color:Colors.PRIMARY,
+          textAlign:'center',
+          fontFamily:'outfit',
+          fontSize:17
+        }}>Create Account</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -72,5 +90,17 @@ const styles = StyleSheet.create({
         borderRadius:15,
         borderColor:Colors.GRAY,
         fontFamily:'outfit'
+    },
+    buttonLogin:{
+        padding:15,
+        backgroundColor:Colors.PRIMARY,
+        borderRadius:99,
+        marginTop:'15%'
+    },
+    buttonRegister:{
+      padding:15,
+        backgroundColor:Colors.WHITE,
+        borderRadius:99,
+        marginTop:'8%'
     }
 });
