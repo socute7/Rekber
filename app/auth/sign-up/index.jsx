@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import { useNavigation, useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
@@ -13,6 +13,11 @@ export default function SignUp() {
     })
 },[])
   return (
+    <KeyboardAvoidingView
+    style={{ flex: 1 }}
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+  >
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
     <View style={{
       padding:25,
       backgroundColor:Colors.BACK,
@@ -66,7 +71,8 @@ export default function SignUp() {
             fontFamily:'outfit',
             marginBottom:10
         }}>Password</Text>
-        <TextInput style={[styles.input, {color:'white'}]} 
+        <TextInput style={[styles.input, {color:'white'}]}
+        secureTextEntry={true} 
         placeholder='Enter Password'
         placeholderTextColor='gray'/>
       </View>
@@ -81,6 +87,8 @@ export default function SignUp() {
         }}>Create Account</Text>
       </TouchableOpacity>
     </View>
+    </ScrollView>
+    </KeyboardAvoidingView>
   )
 }
 
