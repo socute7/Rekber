@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import React from 'react'
 import { Colors } from '@/constants/Colors';
 import { useRouter } from 'expo-router';
@@ -8,6 +8,7 @@ export default function Login() {
     const router=useRouter();
 
   return (
+    <ScrollView>
     <View>
       <Image source={require('./../assets/images/login.jpg')}
       style={{
@@ -41,6 +42,7 @@ export default function Login() {
         </TouchableOpacity>
       </View>
     </View>
+    </ScrollView>
   )
 }
 
