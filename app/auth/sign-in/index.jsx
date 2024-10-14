@@ -2,6 +2,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, KeyboardAvo
 import React, { useEffect, useState } from 'react'
 import { useNavigation, useRouter } from 'expo-router'
 import { Colors } from '@/constants/Colors';
+import { BASE_URL } from '../../config/apiConfig';
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -22,7 +23,7 @@ export default function SignIn() {
     }
   
     try {
-      const response = await fetch('http://192.168.1.3:3000/login', {
+      const response = await fetch(`${BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

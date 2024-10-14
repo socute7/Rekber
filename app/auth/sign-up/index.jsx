@@ -24,7 +24,7 @@ export default function SignUp() {
     }
 
     try {
-      const response = await fetch('http://192.168.1.3:3000/register', {
+      const response = await fetch(`${BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
