@@ -1,8 +1,9 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView, Platform, Alert } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { useNavigation, useRouter } from 'expo-router'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, KeyboardAvoidingView, ScrollView, Platform, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { useNavigation, useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
 import { BASE_URL } from '../../config/apiConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -12,7 +13,7 @@ export default function SignIn() {
 
   useEffect(() => {
     navigation.setOptions({
-      headerShown: false
+      headerShown: false,
     });
   }, []);
 
@@ -39,7 +40,14 @@ export default function SignIn() {
   
       if (data.token) { 
         Alert.alert("Success", "Logged in successfully!", [
-          { text: "OK", onPress: () => router.replace('/home') },
+          { text: "OK", onPress: async () => {
+            if (data.token) {
+              await AsyncStorage.setItem('userToken', data.token);
+              await AsyncStorage.setItem('userId', data.user.id);
+            }
+            console.log('Login response:', data);            
+              router.replace('/home');
+            }},
         ]);
       } else {
         Alert.alert("Error", data.message || "Invalid credentials.");
@@ -49,8 +57,6 @@ export default function SignIn() {
       Alert.alert("Error", "Something went wrong.");
     }
   };
-  
-  
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -100,28 +106,28 @@ export default function SignIn() {
 const styles = StyleSheet.create({
   container: {
     padding: 25,
-    backgroundColor: Colors.BACK,
+    backgroundColor: Colors.BLACK,
     paddingTop: 80,
-    height: '100%'
+    height: '100%',
   },
   logo: {
     width: '100%',
-    height: 150
+    height: 150,
   },
   title: {
     color: Colors.WHITE,
     fontSize: 25,
     textAlign: 'center',
     fontFamily: 'outfit-bold',
-    marginBottom: 20
+    marginBottom: 20,
   },
   inputContainer: {
-    marginTop: 20
+    marginTop: 20,
   },
   label: {
     color: Colors.WHITE,
     fontFamily: 'outfit',
-    marginBottom: 10
+    marginBottom: 10,
   },
   input: {
     padding: 15,
@@ -129,19 +135,19 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderColor: Colors.GRAY,
     color: 'white',
-    fontFamily: 'outfit'
+    fontFamily: 'outfit',
   },
   buttonLogin: {
     padding: 15,
     backgroundColor: Colors.PRIMARY,
     borderRadius: 99,
-    marginTop: '15%'
+    marginTop: '15%',
   },
   buttonText: {
     color: Colors.WHITE,
     textAlign: 'center',
     fontFamily: 'outfit',
-    fontSize: 17
+    fontSize: 17,
   },
   buttonRegister: {
     padding: 15,
@@ -149,12 +155,12 @@ const styles = StyleSheet.create({
     borderRadius: 99,
     marginTop: '5%',
     borderWidth: 1,
-    borderColor: Colors.WHITE
+    borderColor: Colors.WHITE,
   },
   buttonTextAlt: {
     color: Colors.WHITE,
     textAlign: 'center',
     fontFamily: 'outfit',
-    fontSize: 17
-  }
+    fontSize: 17,
+  },
 });

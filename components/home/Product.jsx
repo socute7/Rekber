@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { products } from '../../constants/productList';
+import { Colors } from '@/constants/Colors';
 
 const Product = ({ selectedCategory }) => {
   const navigation = useNavigation();
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
   },
   productTitle: {
     fontFamily: 'outfit-bold',
+    color: Colors.WHITE,
     fontSize: 24,
     marginBottom: 10,
   },
@@ -56,15 +58,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   productCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#2c2c2e',
     borderRadius: 10,
     padding: 5,
     marginBottom: 15,
     width: '48%',
     shadowColor: '#000',
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 5,
-    elevation: 3,
+    elevation: 4,
     height: 150,
     justifyContent: 'center',
     alignItems: 'center',
@@ -73,11 +75,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 80,
     resizeMode: 'contain',
-    marginBottom: 5,
+    marginBottom: 10,
   },
   productName: {
     fontWeight: 'bold',
     fontSize: 14,
+    color: '#fff',
     marginBottom: 2,
   },
   productPrice: {

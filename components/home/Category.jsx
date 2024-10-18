@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Colors } from '@/constants/Colors';
 
 const categories = [
   { name: 'All Categories', image: require('../../assets/images/categories.png') },
@@ -43,6 +44,7 @@ const styles = StyleSheet.create({
   },
   categoryTitle: {
     fontFamily: 'outfit-bold',
+    color: Colors.WHITE,
     fontSize: 24,
     marginBottom: 10,
   },

@@ -2,6 +2,7 @@ import { View, Text, Image, TextInput, StyleSheet, TouchableOpacity, KeyboardAvo
 import React, { useEffect, useState } from 'react';
 import { useNavigation, useRouter } from 'expo-router';
 import { Colors } from '@/constants/Colors';
+import { BASE_URL } from '../../config/apiConfig';
 
 export default function SignUp() {
   const router = useRouter();
@@ -107,7 +108,7 @@ export default function SignUp() {
 const styles = StyleSheet.create({
   container: {
     padding: 25,
-    backgroundColor: Colors.BACK,
+    backgroundColor: Colors.BLACK,
     paddingTop: 80,
     height: '100%',
   },
