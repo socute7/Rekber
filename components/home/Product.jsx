@@ -4,11 +4,13 @@ import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'rea
 import { products } from '../../constants/productList';
 import { Colors } from '@/constants/Colors';
 
-const Product = ({ selectedCategory }) => {
+const Product = ({ selectedCategory, searchTerm }) => {
   const navigation = useNavigation();
-  const filteredProducts = selectedCategory === 'All Categories' 
-    ? products 
-    : products.filter(product => product.category === selectedCategory);
+  const filteredProducts = products.filter(product => {
+    const matchesCategory = selectedCategory === 'All Categories' || product.category === selectedCategory;
+    const matchesSearchTerm = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearchTerm;
+  });
 
   return (
     <View style={styles.productContainer}>

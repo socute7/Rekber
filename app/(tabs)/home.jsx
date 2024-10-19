@@ -6,12 +6,13 @@ import Product from '../../components/home/Product';
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <View style={styles.container}>
-      <SearchBar />
+      <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm}/>
       <Category selectedCategory={selectedCategory} onSelectCategory={setSelectedCategory} />
-      <Product selectedCategory={selectedCategory} />
+      <Product selectedCategory={selectedCategory} searchTerm={searchTerm}/>
     </View>
   );
 }
