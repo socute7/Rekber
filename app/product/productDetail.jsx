@@ -41,9 +41,9 @@ const ProductDetail = () => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Text style={styles.title}>{product.name}</Text>
         <Image source={product.image} style={styles.productImage} />
-        <View>
+        <View style={styles.containerDetail}>
           <Text style={styles.detailTitle}>Detail Produk</Text>
-          <Text style={styles.price}>{product.price}</Text>
+          <Text style={styles.price}>Price: {product.price}</Text>
           <Text style={styles.description}>{product.description}</Text>
         </View>
       </ScrollView>
@@ -51,10 +51,14 @@ const ProductDetail = () => {
       {/* Button Container */}
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.chatButton} onPress={() => navigation.navigate('product/chat')}>
-          <Text style={styles.buttonText}><Ionicons name="chatbox-ellipses-outline" size={30} color="black" /></Text>
+          <Text style={styles.buttonText}>
+            <Ionicons name="chatbox-ellipses-outline" size={30} color="black" />
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buyButton} onPress={() => console.log('Buying product')}>
-          <Text style={styles.buttonText}><AntDesign name="shoppingcart" size={30} color="white" /></Text>
+          <Text style={styles.buttonText}>
+            <AntDesign name="shoppingcart" size={30} color="white" />
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -67,19 +71,27 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.BLACK,
     paddingTop: 80,
   },
+  containerDetail: {
+    backgroundColor: Colors.WHITE,
+    marginTop: 20,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    padding: 25,
+    paddingBottom: 300, 
+  },
   scrollContainer: {
     padding: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color:Colors.WHITE,
+    color: Colors.WHITE,
     marginBottom: 10,
     textAlign: 'center',
   },
   price: {
     fontSize: 20,
-    color: Colors.WHITE,
+    color: Colors.BLACK,
     marginTop: 10,
     fontWeight: 'bold',
   },
@@ -99,13 +111,13 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 18,
-    color: Colors.WHITE,
+    color: Colors.BLACK,
     marginTop: 10,
     lineHeight: 24,
   },
   detailTitle: {
     fontFamily: 'outfit-bold',
-    color:Colors.WHITE,
+    color: Colors.BLACK,
     fontSize: 18,
     marginTop: 30,
   },
@@ -122,7 +134,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 15,
     paddingHorizontal: 30,
-    width:'25%',
+    width: '25%',
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -150,11 +162,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    transform: [{ scale: 1 }],
-    transition: 'transform 0.1s ease-in-out',
-  },
-  buttonIcon: {
-    marginBottom: 5,
   },
   errorText: {
     fontSize: 16,
