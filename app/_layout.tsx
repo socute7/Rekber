@@ -16,7 +16,6 @@ export default function RootLayout() {
     );
   }
 
-  // Ensure only <Stack.Screen> are children of <Stack>
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="(tabs)" />

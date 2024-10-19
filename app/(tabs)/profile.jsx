@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, ActivityIndicator, Alert, Image } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, Alert, Image, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { BASE_URL } from '../config/apiConfig';
 import { Colors } from '@/constants/Colors';
 import { useNavigation } from '@react-navigation/native';
+import { router } from 'expo-router';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -50,6 +51,16 @@ const Profile = () => {
     });
   }, [navigation]);
 
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('userToken');
+      await AsyncStorage.removeItem('userId');
+      router.replace('auth/sign-in');
+    } catch (error) {
+      console.error('Failed to log out:', error);
+    }
+  };
+
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
@@ -69,6 +80,10 @@ const Profile = () => {
       ) : (
         <Text style={styles.text}>No user data found.</Text>
       )}
+
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Text style={styles.logoutButtonText}>Log Out</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -120,6 +135,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: Colors.WHITE,
     textAlign: 'center',
+  },
+  logoutButton: {
+    marginTop: 30,
+    backgroundColor: '#dc143c',
+    paddingVertical: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  logoutButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
