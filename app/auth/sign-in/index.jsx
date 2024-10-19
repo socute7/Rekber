@@ -139,12 +139,12 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     padding: 15,
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.WHITE,
     borderRadius: 99,
     marginTop: '15%',
   },
   buttonText: {
-    color: Colors.WHITE,
+    color: Colors.BLACK,
     textAlign: 'center',
     fontFamily: 'outfit',
     fontSize: 17,
